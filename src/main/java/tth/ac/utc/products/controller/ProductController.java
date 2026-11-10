@@ -20,7 +20,11 @@ public class ProductController {
         return "This is about page...";
     }
 
-    private final ProductService productService = new InMemoryProductService();
+    private final ProductService productService;
+    public ProductController(ProductService productService){
+        this.productService = productService;
+    }
+
     @GetMapping("/products")
     public List<Product> list() {
         return productService.findAll();
@@ -33,5 +37,12 @@ public class ProductController {
     @GetMapping("/products/s")
     public List<Product> search(@RequestParam String keyword) {
         return productService.findByName(keyword);
+    }
+
+    @GetMapping("/product/add")
+    public Product add(@RequestParam String name,
+                       @RequestParam double price,
+                       @RequestParam int stock) {
+        return productService.save(new Product(null, name, price, stock));
     }
 }

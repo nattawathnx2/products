@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import tth.ac.utc.products.model.Product;
+import org.springframework.stereotype.Service;
+@Service
 public class InMemoryProductService implements ProductService {
     private final List<Product> products = new ArrayList<>();
     private long nextId = 1;
